@@ -7,8 +7,8 @@ Autobookr uses user zipcode to find mechanics near the area to book a appointmen
 </p>
 
 <h1>Installations</h1>
--Python
--Flask
+- Python
+- Flask
 
 
 
