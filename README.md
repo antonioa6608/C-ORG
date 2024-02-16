@@ -7,9 +7,10 @@ Autobookr uses user zipcode to find mechanics near the area to book a appointmen
 </p>
 
 <h1>Installations</h1>
-1.Python
+<p> 1.Python
 2. Flask
-In terminal run to see the latest version of python and pip 
+In terminal run to see the latest version of python and pip </p>
+
 ```
 python --version
 ```
