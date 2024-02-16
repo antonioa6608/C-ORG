@@ -9,6 +9,13 @@ Autobookr uses user zipcode to find mechanics near the area to book a appointmen
 <h1>Installations</h1>
 1.Python
 2. Flask
+In terminal run to see the latest version of python and pip 
+```
+python --version
+```
+```
+pip --version 
+```
 
 
 
