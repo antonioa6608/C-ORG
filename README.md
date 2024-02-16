@@ -7,11 +7,18 @@ Autobookr uses user zipcode to find mechanics near the area to book a appointmen
 </p>
 
 <h1>Installations</h1>
-- Python
-- Flask
+1.Python
+2. Flask
 
 
 
 <h1>vitural env vs pipenv </h1>
+<p> It is recommended to use pipenv since using virutalenv may break dependencies. 
+  In the terminal run command to install pipenv 
+</p>
+
+```
+pip install --user pipenv 
+```
 
 
