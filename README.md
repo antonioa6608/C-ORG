@@ -6,9 +6,11 @@ Autobookr uses user zipcode to find mechanics near the area to book a appointmen
 
 </p>
 
-Installations 
-python 
-flask 
+<h1>Installations</h1>
+<list>Python </list>
+<list>Flask</list>
+
+
 
 <h1>vitural env vs pipenv </h1>
 
