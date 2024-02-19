@@ -23,10 +23,23 @@ pip --version
 <h1>vitural env vs pipenv </h1>
 <p> It is recommended to use pipenv since using virutalenv may break dependencies. 
   In the terminal run command to install pipenv 
+  Steps to install pipenv
 </p>
 
 ```
 pip install --user pipenv 
+```
+```
+pipenv install flask 
+```
+```
+pipenv shell 
+```
+```
+pipenv run python app.py 
+```
+```
+exit
 ```
 
 
