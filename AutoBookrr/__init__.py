@@ -41,7 +41,7 @@ def create_app():
 
 #create the database if it does not exits
 def create_database(app):
-    if not path.exists("autobookrr/" + DB_NAME):
+    if not path.exists("AutoBookrr/" + DB_NAME):
         with app.app_context():
             db.create_all()
         print("created database!")

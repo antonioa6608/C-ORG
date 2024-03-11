@@ -1,4 +1,4 @@
-from autobookrr import create_app
+from AutoBookrr import create_app
 
 #run the flask app 
 if __name__ == "__main__":
