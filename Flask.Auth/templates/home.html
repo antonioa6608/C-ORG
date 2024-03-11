@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to AutoBookr</title>
+    <style>
+        body {
+            background-color: lightgray;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: blue;
+            font-weight: bold;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            margin: 20px auto;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyyZovyzdqOGKYhle0UtIaTAM596gv1zI&libraries=places"></script>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 435.782169, lng: -80.793457}, 
+                zoom: 10
+            });
+
+            var zipCode = document.getElementById('zip_code').value;
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'address': zipCode}, function(results, status) {
+                if (status === 'OK') {
+                    map.setCenter(results[0].geometry.location);
+
+                    var request = {
+                        location: results[0].geometry.location,
+                        radius: '100', 
+                        type: ['car_repair'] 
+                    };
+
+                    var service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch(request, function(results, status) {
+                        if (status === 'OK') {
+                            for (var i = 0; i < results.length; i++) {
+                                createMarker(results[i]);
+                            }
+                        }
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                content: place.name
+            });
+
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to AutoBookr</h1>
+    <label for="zip_code">Enter your zip code:</label>
+    <input type="text" id="zip_code" name="zip_code" required>
+    <input type="button" value="Find Mechanics" onclick="initMap()">
+    <div id="map"></div>
+</body>
+</html>
