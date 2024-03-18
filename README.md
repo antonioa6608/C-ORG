@@ -28,7 +28,10 @@ pip --version
 </p>
 
 <h1> GOOGLE MAP USAGE</h1>
-<p> Click on the Flask.Auth use the python app.py command to run the program. When acess the web type the zip code but if you want a specific location type state, city, zip code, and street then zoom in and it should show.  </p>
+<p> Click on the Flask.Auth use the python app.py command to run the program. When acess the web type the zip code but if you want a specific location type state, city, zip code, and 
+street then zoom in and it should show.  </p>
+
+
 ```
 pip install --user pipenv 
 ```
