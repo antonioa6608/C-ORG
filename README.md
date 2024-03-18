@@ -6,6 +6,9 @@ Autobookr uses user zipcode to find mechanics near the area to book a appointmen
 ![AutoBookrr (1)](https://github.com/antonioa6608/C-ORG/assets/90696477/a487e784-d8e2-4287-9eb3-f189cef928ce)
 
 </p>
+<h1> GOOGLE MAP USAGE</h1>
+<p> Click on the Flask.Auth use the python app.py command to run the program. When acess the web type the zip code but if you want a specific location type state, city, zip code, and 
+street then zoom in and it should show.  </p>
 
 <h1>Installations</h1>
 <p> 1.Python
@@ -26,11 +29,6 @@ pip --version
   In the terminal run command to install pipenv 
   Steps to install pipenv
 </p>
-
-<h1> GOOGLE MAP USAGE</h1>
-<p> Click on the Flask.Auth use the python app.py command to run the program. When acess the web type the zip code but if you want a specific location type state, city, zip code, and 
-street then zoom in and it should show.  </p>
-
 
 ```
 pip install --user pipenv 
