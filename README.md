@@ -21,6 +21,14 @@ python --version
 ```
 pip --version 
 ```
+<h1>Installing flask/flask_alchemy </h1>
+<p>Must have flask and flask_alchemy </p>
+
+```
+pip install flask
+pip install flask_alchemy 
+
+```
 
 
 
@@ -45,5 +53,7 @@ pipenv run python app.py
 ```
 exit
 ```
-
+<h1> Accessing project AutoBookrr </h1>
+<p> The website is located in the AutoBookrr folder,Once all commands have been installed pip install flask , pip install flask_alchemy. Locate the app.python to run the flask app. Copy the host ip , paste to a new window. You will have access to the homepage, login,register . 
+</p>
 
