@@ -1,0 +1,15 @@
+[project]
+name = "Autobookr"
+version = "1.0.0"
+description = "used to find mechanics and book appointments
+dependencies = [
+    "flask",
+    "Google-Images-Search",
+    "werkzeug",
+    "pytest",
+    "windows-curses"
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"

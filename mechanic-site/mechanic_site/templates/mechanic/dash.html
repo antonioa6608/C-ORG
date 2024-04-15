@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Mechanic Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Mechanic Dashboard</h1>
+            <br>
+            <div class="">
+                <a href="{{ url_for('mechanic.reviews', id=1) }}" class="btn btn-info">View Reviews</a>
+            </div>
+            <br>
+            
+                    {% if not appointments %}
+                        <p>No appointments</p>
+                    {% else %}
+                        {% for appointment in appointments %}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Appointment with {{ appointment.customer_name }}</h5>
+                                    <p class="card-text">Time: {{ appointment.appointment_time }}</p>
+                                    <p class="card-text">Car: {{ appointment.car_make }} {{ appointment.car_model }}</p>
+                                    {% if appointment.appointment_status == 0 %}
+                                    <form action="{{ url_for('mechanic.confirm_appointment') }}" method="post">
+                                        <input type="hidden" name="appointment_id" value="{{ appointment.appointment_id }}">
+                                        <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                
+        </div>
+    </div>
+</div>
+{% endblock %}

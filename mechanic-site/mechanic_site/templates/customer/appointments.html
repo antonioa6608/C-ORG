@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Appointments{% endblock %}
+
+{% block head %}
+
+<!-- Include FullCalendar resources -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load upcoming appointments in FullCalendar
+        var calendarEl = document.getElementById('upcoming-calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth', // Display the month view
+            height: 'auto',
+            events: [
+                // Example event data for testing
+                { title: 'Appointment with Mechanic A', start: '2024-04-01' },
+                { title: 'Appointment with Mechanic B', start: '2024-04-10' }
+            ]
+        });
+        calendar.render();
+
+        // Load past appointments and sort them into "To Review" and "Reviewed" sections
+        var pastAppointments = [
+            // Example past appointment data for testing
+            { mechanic: 'Mechanic C', date: '2024-03-15', review: null },
+            { mechanic: 'Mechanic D', date: '2024-03-25', review: { rating: 4, comment: 'Great service!' } }
+        ];
+
+        var toReviewList = document.getElementById('to-review-list');
+        var reviewedList = document.getElementById('reviewed-list');
+
+        pastAppointments.forEach(function(appointment) {
+            var listItem = document.createElement('li');
+            listItem.textContent = 'Appointment with ' + appointment.mechanic + ' on ' + dayjs(appointment.date).format('YYYY-MM-DD');
+            if (appointment.review) {
+                listItem.textContent += ' - Reviewed';
+                reviewedList.appendChild(listItem);
+            } else {
+                toReviewList.appendChild(listItem);
+            }
+        });
+
+    });
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Appointments</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Upcoming Appointments</h4>
+            <div id="upcoming-calendar"></div>
+        </div>
+        <div class="col-md-6">
+            <h4>Past Appointments</h4>
+            <h5>To Review</h5>
+            <ul id="to-review-list">
+                <!-- List of past appointments with no review attached -->
+                <!-- Example: <li>Appointment with [Mechanic Name] on [Date]</li> -->
+            </ul>
+            <h5>Reviewed</h5>
+            <ul id="reviewed-list">
+                <!-- List of past appointments with a review attached -->
+                <!-- Example: <li>Appointment with [Mechanic Name] on [Date] - Reviewed</li> -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
