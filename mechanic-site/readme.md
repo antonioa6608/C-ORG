@@ -2,6 +2,13 @@
 
 Autobookr find mechanics near and book appointments 
 
+cd C-ORG 
+cd mechanic-site 
+python -m venv env 
+./env/Scripts/activate
+pip install -e . 
+flask --app run mechanic_site --debug 
+
 ## Create and activate virtual environment (optional)
 
 To create a virtual environment run:
@@ -37,7 +44,7 @@ The project might look a bit empty at first, so I added a command to fill americ
 
 Run the server with
 
-    flask --app mechanic-site run --debug
+    flask --app mechanic_site run --debug
 
 Then open the address it is running on in a browser.
 
