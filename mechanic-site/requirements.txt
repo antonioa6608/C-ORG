@@ -1,0 +1,5 @@
+flask
+Google-Images-Search
+werkzeug
+pytest
+windows-curses

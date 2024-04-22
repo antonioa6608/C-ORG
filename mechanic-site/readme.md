@@ -7,7 +7,7 @@ Autobookr find mechanics near and book appointments
 3.python -m venv env 
 4.  ./env/Scripts/activate
 5. pip install -e . 
-6 .flask --app run mechanic_site --debug 
+6 flask --app mechanic_site run --debug 
 
 ## link to database 
 https://sqlitebrowser.org/dl/
