@@ -1,6 +1,16 @@
 # Readme
 
 Autobookr find mechanics near and book appointments 
+# Steps 
+1.cd C-ORG 
+2.cd mechanic-site 
+3.python -m venv env 
+4.  ./env/Scripts/activate
+5. pip install -e . 
+6 flask --app mechanic_site run --debug 
+
+## link to database 
+https://sqlitebrowser.org/dl/
 
 ## Create and activate virtual environment (optional)
 
@@ -37,7 +47,7 @@ The project might look a bit empty at first, so I added a command to fill americ
 
 Run the server with
 
-    flask --app mechanic-site run --debug
+    flask --app mechanic_site run --debug
 
 Then open the address it is running on in a browser.
 
