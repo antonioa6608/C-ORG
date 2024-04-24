@@ -45,6 +45,7 @@ The projects and it's dependancies can be installed with: MANAULLY
 `pip install Google-Images-Search`
 `pip install pytest`
 `pip install windows-curses`
+`pip install werkzeug`
 
 ## we used sqlite3 for the database. link to download , standard installer depending on what type of operating system in your machine 
 https://sqlitebrowser.org/dl/
