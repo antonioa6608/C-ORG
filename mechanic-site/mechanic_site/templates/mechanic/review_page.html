@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Mechanic Reviews{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">{{ mechanic_name }}</h1>
+            <div class="d-flex justify-content-between">
+                <p class="">Average Rating: {{ average_rating }} </p>
+                <p class="text-right">Zipcode: {{ mechanic_zipcode }}</p>
+            </div>
+            <hr>
+            <h3>Reviews</h3>
+            {% if reviews %}
+            {% for review in reviews %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    Customer: {{ review.customer_name }}
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-0">Rating: {{ review.review_score }} </p>
+                        <p class="mb-0 text-right">Date: {{ review.start_time.strftime("%d/%m/%Y") }}</p>
+                    </div>
+                    <br>
+                    <p>Review: {{ review.review_text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p> No reviews </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Mechanic Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Mechanic Profile</h1>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <p><strong>Name:</strong> {{ mechanic.name }}</p>
+                    <p><strong>ZIP Code:</strong> {{ mechanic.zipcode }}</p>
+                    <p><strong>EIN:</strong> {{ mechanic.ein }}</p>
+                    <!-- Button to edit profile -->
+                    <a href="{{ url_for('mechanic.edit_profile') }}" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

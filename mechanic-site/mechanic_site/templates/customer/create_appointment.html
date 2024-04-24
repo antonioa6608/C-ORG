@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Appointment{% endblock %}
+
+{% block head %}
+
+<!-- Include FullCalendar resources -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+<!-- Add Google Maps API script here -->
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_wAq3K--DmwySXuAzyIWnexYzuT26hg&callback=initMap&loading=async"></script>
+
+
+<style>
+
+    @media only screen and (max-width: 768px) {
+        #map-container {
+            display: none; /* Hide the map container on small screens */
+        }
+    }
+
+    .fc-highlight {
+        background: rgba(0, 255, 80, 0.47) !important;
+    }
+</style>
+
+<script>
+    var map;
+    var geocoder;
+
+    // Function to handle the "Add Car" button click
+    function addCar() {
+        // unhide the edit car card
+        document.getElementById('edit-car').classList.remove('d-none');
+
+        // Hide the new car card
+        document.getElementById('new-car-card').classList.add('d-none');
+        
+        // Retrieve car details from the form
+        var make = document.getElementById('make').value;
+        var modelNumber = document.getElementById('model-number').value;
+        var registrationNumber = document.getElementById('registration-number').value;
+        
+        // Create an option element for the new car
+        var newCarOption = document.getElementById("new-car-option");
+        newCarOption.innerText = 'New Car - ' + make + ' - ' + modelNumber + ' (' + registrationNumber + ')';
+        
+        document.getElementById("add-apply").innerHTML = "Apply";
+
+    }
+
+    // Function to handle the "Edit" button click
+    function editCar() {
+        // Show the new car card
+        document.getElementById('new-car-card').classList.remove('d-none');
+        document.getElementById("edit-car").classList.add('d-none');
+    }
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14 // Zoom level
+        });
+
+        geocoder = new google.maps.Geocoder();
+        geocodeZipCode('{{ mechanic.zipcode }}');
+    }
+
+    function geocodeZipCode(zipCode) {
+        geocoder.geocode({ 'address': zipCode }, function(results, status) {
+            if (status === 'OK') {
+                map.setCenter(results[0].geometry.location);
+                // Add a marker for the mechanic's location
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    title: '{{ mechanic.name }}'
+                });
+            } else {
+                console.error('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+    function selectChange() {
+        console.log("switching");
+        var newCarForm = document.getElementById('new-car-id');
+        if (document.getElementById("car").value === 'new_car') {
+            newCarForm.classList.remove('d-none');
+        } else {
+            newCarForm.classList.add('d-none');
+        }
+    }
+
+    // Initialize FullCalendar
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            
+            initialView: 'timeGridWeek', // Display the week view
+            height: 'auto',
+            allDaySlot: false, // Hide the all-day slot
+            slotMinTime: '10:00:00', // Set the minimum time to 10:00 AM
+            slotMaxTime: '20:00:00', // Set the maximum time to 8:00 PM
+            selectable: true, // Enable selection
+            events: [
+                // Add existing events from mechanic's schedule
+                {% for appointment in appointments %}
+                {
+                    title: 'Busy', // Display a generic label for privacy reasons
+                    start: '{{ appointment.start_time }}', // Assuming appointment start time is available
+                    end: '{{ appointment.end_time }}', // Assuming appointment end time is available
+                    color: 'red' // Customize the event color as needed
+                },
+                {% endfor %}
+            ],
+            select: function(arg) {
+                // Handle selection
+                
+                var start = arg.start;
+                var end = arg.end;
+                var duration = end-start; // Calculate duration
+
+                // Ensure the selected duration is 4 hours
+                if (duration/1000/60/60 < 1) {
+                    // Alert the user to select a 4-hour window
+                    alert('Apointment must be at least an hour.');
+                    calendar.unselect(); // Deselect the range
+                } 
+                else if (duration/1000/60/60 > 4) {
+                    alert('Apointment must be at no more than 4 hours.');
+                    calendar.unselect(); // Deselect the range
+                }
+                else {
+                    document.getElementById('start-time').value = start.toISOString();
+                    document.getElementById('end-time').value = end.toISOString();
+                }
+            }
+        });
+
+        calendar.render(); // Render the calendar
+        setTimeout(()=> {
+            calendar.render();
+        },100);
+    });
+
+    function validateForm() {
+        // Check if a suitable time range has been selected on the calendar
+        var startTime = document.getElementById('start-time').value;
+        var endTime = document.getElementById('end-time').value;
+
+        if (!startTime || !endTime) {
+            alert('Please select a suitable time range on the calendar.');
+            return false;
+        }
+
+        // Check if new car option is selected and new car fields are empty
+        var carSelect = document.getElementById('car');
+        if (carSelect.value === 'new_car') {
+            var make = document.getElementById('make').value;
+            var modelNumber = document.getElementById('model-number').value;
+            var registrationNumber = document.getElementById('registration-number').value;
+
+            if (!make || !modelNumber || !registrationNumber) {
+                alert('Please enter details for the new car.');
+                return false;
+            }
+        }
+
+        // Check if description of the problem is empty
+        var description = document.getElementById('description').value;
+        if (!description.trim()) {
+            alert('Please enter a description of the problem.');
+            return false;
+        }
+
+        return true; // Form is valid
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Google Maps container -->
+        <div class="col-md-6" id = "map-container">
+            <div id="map" style="height: 100%;"></div>
+        </div>
+
+        
+
+        <!-- Appointment form -->
+        <div class="col-md-6">
+            <h2 class="text-center">Mechanic: {{ mechanic.name }}</h2>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <p class="mb-0">Zip-code: {{ mechanic.zipcode }}</p>
+                <p class="mb-0 text-right">Rating: {{ mechanic.average_rating }}</p>
+            </div>
+            
+            <br>
+            <br>
+            <div class="card mt-3">
+                <h4 class="text-center card-header">Appointment Details</h3>
+                <div class="card-body">
+                    
+                    <form action="" method="POST">
+                        <div class="form-group">
+                            <label for="car">Select Car:</label>
+                            <select class="form-control" id="car" name="car" onchange="selectChange()">
+                                {% for car in customer_cars %}
+                                <option value="{{ car.registration }}">{{ car.make }} - {{ car.model }} ({{ car.registration }})</option>
+                                {% endfor %}
+
+                                <option value="new_car" id="new-car-option">New Car</option>
+                            </select>
+                        </div>
+                        <div class = "d-none" id="new-car-id">
+                            <br>
+                            <button type="button" class="btn btn-primary d-none" id="edit-car" onclick="editCar()">Edit Car:</button>
+                            <div id="new-car-card" class="card mt-3">
+                                <div class="card-body">
+                                    <div id="new-car-form" class="form-group">
+                                        <div class="mb-3">
+                                            <label for="make">Make</label>
+                                            <input type="text" class="form-control" id="make" name="make" >
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="model-number">Model Number</label>
+                                            <input type="text" class="form-control" id="model-number" name="model_number" >
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="registration-number">Registration Number</label>
+                                            <input type="text" class="form-control" id="registration-number" name="registration_number" >
+                                        </div>
+                                        <button type="button" class="btn btn-primary" onclick="addCar()" id="add-apply">Add Car</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        
+                        <div class="form-group">
+                            <label for="description">Description of Problem:</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <!-- fullcalendar Display and selector -->
+                            <div id="calendar"></div>
+                            <input type="hidden" id="start-time" name="start_time">
+                            <input type="hidden" id="end-time" name="end_time">
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary"  onclick="return validateForm()">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

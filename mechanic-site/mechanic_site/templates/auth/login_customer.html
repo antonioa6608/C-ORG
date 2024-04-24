@@ -1,0 +1,5 @@
+{% extends 'auth/login_base.html' %}
+
+{% block login_type %}Customer{% endblock %}
+
+{% block login_action %}{{ url_for('auth.customer_login') }}{% endblock %}

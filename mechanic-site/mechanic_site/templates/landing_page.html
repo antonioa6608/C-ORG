@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to our Car Mechanic Scheduler{% endblock %}
+
+{% block head %}
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_wAq3K--DmwySXuAzyIWnexYzuT26hg&libraries=places&callback=initMap"></script>
+
+
+<script>
+    var map;
+    var geocoder;
+    var markers = [];
+    var nearbyMechanics = [];
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 37.0902, lng: -95.7129}, // Centered on the USA
+            zoom: 4 // Zoomed out to show the entire USA
+        });
+
+        geocoder = new google.maps.Geocoder();
+        loadMechanics();
+    }
+
+
+    function loadMechanics() {
+        {% for mechanic in nearby_mechanics %}
+        loadMechanic(
+            "{{ mechanic.name }}",
+            "{{ mechanic.zipcode }}",
+            "{{mechanic.avg_rating}}",
+            "{{url_for('mechanic.reviews', id=mechanic.mechanic_id)}}",
+            "{{url_for('customer.booking_form', id=mechanic.mechanic_id)}}"
+            );
+        {% endfor %}
+    }
+
+    function loadMechanic(name, zipCode, rating, review_url, booking_url) {
+        geocoder.geocode({'address': zipCode}, function(results, status) {
+            if (status === 'OK') {
+                var mechanicLocation = results[0].geometry.location;
+                var mechanic = {
+                    name: name,
+                    rating: rating,
+                    review_url: review_url,
+                    zip_code: zipCode,
+                    location: mechanicLocation,
+                    latitude: mechanicLocation.lat(),
+                    longitude: mechanicLocation.lng(),
+                    booking_url: booking_url
+                };
+                nearbyMechanics.push(mechanic);
+                addMarker(mechanicLocation, name);
+            } else {
+                console.error('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+    function addMarker(location, name) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            title: name
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+            content: name
+        });
+
+        marker.addListener('mouseover', function() {
+            infowindow.open(map, marker);
+        });
+
+        marker.addListener('mouseout', function() {
+            infowindow.close();
+        });
+
+        markers.push(marker);
+    }
+</script>
+{% endblock %}
+
+{% block navbar_items %}
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="registrationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Registration
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="registrationDropdown">
+                <li><a class="dropdown-item" href="{{ url_for('auth.customer_register') }}">Customer Register</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('auth.mechanic_register') }}">Mechanic Register</a></li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Login
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                <li><a class="dropdown-item" href="{{ url_for('auth.customer_login') }}">Customer Login</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('auth.mechanic_login') }}">Mechanic Login</a></li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5" id = "map-container">
+            <div id="map" style="height: 100%;"></div>
+        </div>
+        <div class="col-md-6">
+            <h1>AutoBookr</h1>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
+        </div>
+        <div class="col-md-6">
+            <!-- You can add an image or any other content here -->
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+{% endblock %}
