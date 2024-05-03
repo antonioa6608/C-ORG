@@ -3,6 +3,135 @@
 {% block title %}Welcome to our Car Mechanic Scheduler{% endblock %}
 
 {% block head %}
+
+<style>
+   
+       /* Overall Styling */
+       body, html {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        line-height: 2.0;
+        color: #000000;
+        background-color: #4683B7;
+        background-image: linear-gradient(to bottom right, #ffffff, #4683B7);
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    /* Container */
+   
+
+    /* Map and Image Container Styling */
+    #map {
+        height: 450px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .img-fluid {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    /* Navigation and Links */
+    .nav-link, .dropdown-item {
+        color: #007bff;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:hover, .dropdown-item:hover {
+        color: #0056b3;
+        background-color: #f8f9fa;
+    }
+
+    .dropdown-menu {
+    z-index: 1000; /* Ensures dropdown is on top */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+
+
+    /* Text and Headers */
+    h1, .lead {
+        color: #333;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+
+    .lead {
+        font-size: 1.3rem;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 1.0rem;
+        text-align: center;
+    }
+
+    /* Buttons and Interactive Elements */
+    button, .btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover, .btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Responsive Design Adjustments */
+    @media (max-width: 768px) {
+        #map {
+            height: 300px;
+        }
+    }
+
+        /* Styling for the whole navigation bar */
+        nav {
+        background-color: #000080; /* A deep blue background */
+        color: #000080; /* White text color */
+    }
+
+    .navbar {
+        padding: 0.8rem 1rem; /* Adjust padding to increase or decrease height */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4); /* Subtle shadow for depth */
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+        color: #000080; /* Ensuring the text is white for visibility */
+        transition: color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover,
+    .navbar-light .navbar-nav .nav-link:focus {
+        color: #cff4ff; /* Lighter blue on hover */
+    }
+
+    .dropdown-menu {
+        background-color: #000080; /* Background of the dropdown */
+        border: none; /* Remove any default border */
+        box-shadow: 0 6px 10px rgba(0,0,0,0.25); /* Dropdown shadow for depth */
+    }
+
+    .dropdown-item {
+        color: #ffffff; /* Text color in the dropdown */
+    }
+
+    .dropdown-item:hover, .dropdown-item:focus {
+        background-color: #0056b3; /* Darker blue when hovering over dropdown items */
+        color: #ffffff;
+    }
+</style>
+
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_wAq3K--DmwySXuAzyIWnexYzuT26hg&libraries=places&callback=initMap"></script>
 
 
@@ -24,7 +153,7 @@
 
 
     function loadMechanics() {
-        {% for mechanic in nearby_mechanics %}
+       {% for mechanic in nearby_mechanics %}
         loadMechanic(
             "{{ mechanic.name }}",
             "{{ mechanic.zipcode }}",
@@ -111,16 +240,16 @@
         </div>
         <div class="col-md-6">
             <h1>AutoBookr</h1>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id velit eu risus luctus venenatis. Nam dapibus ipsum ut ultrices suscipit. Donec sagittis sapien ut commodo sodales. Nam pharetra consequat est, ut posuere turpis sodales et. Proin aliquet metus justo, sed eleifend leo bibendum id. Duis non velit eget odio consequat rutrum eu sed nulla. Curabitur ac pretium est.</p>
+            <p class="lead">About</p>
+            <p>Welcome to Autobookr, the premiere website connecting customers with top-rated mechanics and making appointment booking a breeze. Our platform streamlines the entire process, allowing users to search, compare, and book appointments with trusted professionals with just a few clicks. From routine maintenance to emergency repairs, Autobookr is here to make car maintenance simple and stress-free. Say goodbye to long wait times and endless phone calls - let Autobookr handle all your auto service needs.</p>
+            <p>With Autobookr, customers have access to a network of qualified mechanics, ensuring peace of mind knowing their vehicle is in good hands. Our user-friendly interface makes it easy to browse through available service providers, read reviews from other users, and select the best mechanic for their specific needs and budget. Forget the hassle of calling around and negotiating prices - Autobookr simplifies the process and guarantees transparency and professionalism in every appointment booked.</p>
+            <p> Whether you need an oil change, brake repair, or general inspection, Autobookr is the one-stop-shop for all your automotive service needs. Our secure platform protects your personal information and payment details, giving you confidence in every booking. Join the Autobookr community today and experience the convenience and efficiency of finding and booking reliable mechanics right at your fingertips</p>
+            <p>At Autobookr, we prioritize customer satisfaction and aim to provide a seamless experience from start to finish. Our dedicated customer support team is available to assist with any inquiries or issues that may arise during the booking process, ensuring that your experience with Autobookr is positive and hassle-free. We value your feedback and strive to continually improve our services to meet the evolving needs of our users.</p>
+            <p>Autobookr is not just a platform for finding mechanics - it's a community of car enthusiasts and professionals dedicated to promoting safe and efficient auto maintenance practices. By choosing Autobookr, you are not only supporting local businesses but also investing in the longevity and performance of your vehicle. Join us on this automotive journey and let Autobookr revolutionize the way you book appointments and take care of your car.</p>
         </div>
         <div class="col-md-6">
             <!-- You can add an image or any other content here -->
+            <img src="{{ url_for('static', filename='images/AutoBookrr.jpg') }}" class="image" />
         </div>
     </div>
     <br>

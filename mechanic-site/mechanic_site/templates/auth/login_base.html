@@ -3,6 +3,86 @@
 {% block title %}{% block login_type %}{% endblock %} Login {% endblock %}
 
 {% block content %}
+
+<style>
+    body, html {
+    height: 100%;  
+    margin: 0;  
+    font-family: 'Roboto', sans-serif;  
+    color: #333; 
+    background: #f4f4f4 url('../images/loginbackground.png') no-repeat center center fixed; 
+  
+}
+
+
+.container {
+    display: center;  
+    align-items: center;  
+    justify-content: center;  
+    padding: 10px;  
+}
+
+
+.card {
+    background: white;  
+    border-radius: 8px;  
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);  
+    width: 100%;  
+    max-width: 800px;  
+}
+
+
+.card-header {
+    background-color: #000080;  
+    color: white;  
+    padding: 20px 20px;  
+    border-top-left-radius: 10px;  
+    border-top-right-radius: 10px;  
+    font-size: 24px;  
+    text-align: center;  
+    font-weight: 500;  
+}
+
+
+.card-body {
+    padding: 30px;  
+}
+
+
+.form-label {
+    margin-bottom: 8px;  
+    font-weight: 400;  
+}
+
+
+.form-control {
+    padding: 10px; 
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    margin-bottom: 20px; 
+}
+
+
+.btn-primary {
+    width: 50%; 
+    padding: 10px;  
+    border-radius: 5px;  
+    border: none;  
+    background-color: #0056b3;  
+    color: white;  
+    font-size: 16px; 
+    cursor: pointer;  
+    display: block; 
+    margin: 0 auto;  
+}
+
+
+.btn-primary:hover {
+    background-color: #004085;  
+}
+
+</style>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
