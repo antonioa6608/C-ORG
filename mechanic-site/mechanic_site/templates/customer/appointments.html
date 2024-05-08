@@ -3,6 +3,75 @@
 {% block title %}Appointments{% endblock %}
 
 {% block head %}
+<style>
+    /* Body and General Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+    color: #333;
+    background-image: url("{{ url_for('static', filename='images/loginbackground.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    }
+    
+    /* Container Styling */
+    .container {
+        width: 90%;
+        max-width: 1500px;
+        margin: 20px auto;
+    }
+    
+    /* Headings */
+    .container h2, .container h4, .container h5 {
+        color: white; /* Giving a consistent theme color to headings */
+    }
+    
+    /* FullCalendar Styles */
+    #upcoming-calendar {
+        background: white;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* List Styles */
+    ul {
+        list-style-type: none; /* Removes default list styling */
+        padding: 0;
+    }
+    
+    li {
+        background: #fff;
+        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Buttons and Links */
+    .btn-primary {
+        background-color: #000080;
+        border: none;
+    }
+    
+    .btn-primary:hover {
+        background-color: #000080;
+    }
+    
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+        .container {
+            width: 95%;
+        }
+    
+        .col-md-6 {
+            width: 100%; /* Stack columns vertically on smaller screens */
+            margin-bottom: 20px;
+        }
+    }
+    </style>
 
 <!-- Include FullCalendar resources -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>

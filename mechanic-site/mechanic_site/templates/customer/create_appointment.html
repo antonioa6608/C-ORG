@@ -3,7 +3,20 @@
 {% block title %}Create Appointment{% endblock %}
 
 {% block head %}
-
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+    color: #333;
+    background-image: url("{{ url_for('static', filename='images/loginbackground.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    }
+p, h2{
+    color: white;
+}
+</style>
 <!-- Include FullCalendar resources -->
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 <!-- Add Google Maps API script here -->

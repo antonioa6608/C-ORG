@@ -7,15 +7,16 @@
 <style>
    
        /* Overall Styling */
-       body, html {
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        line-height: 2.0;
-        color: #000000;
-        background-color: #4683B7;
-        background-image: linear-gradient(to bottom right, #ffffff, #4683B7);
-        background-attachment: fixed;
-        background-size: cover;
-    }
+       body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background-image: url("{{ url_for('static', filename='images/loginbackground.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+    
 
     /* Container */
    
@@ -54,7 +55,7 @@
 
     /* Text and Headers */
     h1, .lead {
-        color: #333;
+        color: white;
     }
 
     h1 {
@@ -130,6 +131,7 @@
         background-color: #0056b3; /* Darker blue when hovering over dropdown items */
         color: #ffffff;
     }
+
 </style>
 
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl_wAq3K--DmwySXuAzyIWnexYzuT26hg&libraries=places&callback=initMap"></script>
@@ -249,7 +251,7 @@
         </div>
         <div class="col-md-6">
             <!-- You can add an image or any other content here -->
-            <img src="{{ url_for('static', filename='images/AutoBookrr.jpg') }}" class="image" />
+            <img src="{{ url_for('static', filename='images/AutoBookrr.jpg') }}" class="img-fluid mx-auto d-block" />
         </div>
     </div>
     <br>

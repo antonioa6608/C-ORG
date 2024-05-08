@@ -3,6 +3,21 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-image: url("{{ url_for('static', filename='images/loginbackground.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+h1,label{
+    color:white;
+}
+
+</style>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
