@@ -215,5 +215,8 @@ def mechanic_required(view):
 
     return wrapped_view
 
+@bp.route('/tips')
+def tips():
+    return render_template('tips.html')
 
 print("BP: ", bp)

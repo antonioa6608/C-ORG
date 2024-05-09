@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Tips{% endblock %}
+
+{% block content %}
+
+<title>Basic Car Maintenance</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background-image: url("{{ url_for('static', filename='images/loginbackground.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+    .content-wrapper {
+        margin: 20px;
+    }
+    .section-title {
+        margin-top: 20px;
+    }
+    img {
+        width: 40%; /* ensures images are responsive */
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<div class="content-wrapper">
+    <h1>Basic Car Maintenance</h1>
+    <p>Need help from the following list? Scroll Down </p>
+    <ul>
+    <li>Checking Tire Pressure</li>
+    <li>Tire Tread</li>
+    <li>Battery</li>
+    <li>Fluids</li>
+</ul>
+
+    <h2 class="section-title">Checking Tire Pressure</h2>
+    <ul>
+        <li>
+            Before long trips or significant changes in weather, you should check your tire pressure to ensure the proper traction for your vehicle.
+            <img src="{{ url_for('static', filename='images/tire.jpg') }}"class="img-fluid mx-auto d-block" >
+            On the inside of the driver side door is where you should get your tire pressure information. The tire displays the MAX PSI of the tire, which is not ideal. You should check and inflate your tires “cold”, which means they haven’t recently been driven.
+            <img src="{{ url_for('static', filename='images/tiredetail.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+    </ul>
+
+    <h2 class="section-title">Tire Tread</h2>
+    <ul>
+        <li>
+            Checking your tire tread is important for the vehicle's maneuverability on certain roads and weather conditions. An old trick to check your tread is to take a penny and place Lincoln’s head down in the tread. If you can see his entire head, you need a new set of tires.
+            <img src="{{ url_for('static', filename='images/thread.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+    </ul>
+
+    <h2 class="section-title">Battery</h2>
+    <ul>
+        <li>
+            To check your battery requires a voltmeter. You need to place the selector on DC current. Place the black lead to the negative, and the red lead to the positive. A good battery will read anywhere from 13V to 11.6V. If your voltage reads 11.5V it’s a bad battery.
+            <img src="{{ url_for('static', filename='images/battery.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+    </ul>
+
+    <h2 class="section-title">Fluids</h2>
+    <p>There are a few fluids you should check regularly, which are located under the hood of the vehicle.</p>
+    <ul>
+        <li>
+            Oil is most likely the one you will need to change regularly more so than the rest. The cap is labeled and is attached to the dipstick. Remove the dipstick and wipe clean, reinsert the dipstick and remove again to check your measurement. The oil should fall between the lowest and highest indicator.
+            <img src="{{ url_for('static', filename='images/fluid.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+        <li>
+            Transmission fluid may be the hardest of all fluids to check. Sealed transmissions need to be checked by a mechanic and have no dipstick under the hood. You can’t check the transmission fluid “cold”, the vehicle needs to have been running.
+            <img src="{{ url_for('static', filename='images/dipstick.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+        <li>
+            Windshield wiper fluid has a labeled cap with measurement lines indicating the status of the fluid.
+            <img src="{{ url_for('static', filename='images/cap.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+        <li>
+            Radiator fluid also known as coolant and antifreeze is what keeps your engine from overheating. You can monitor the temperature of the engine from the temp gauge.
+            <img src="{{ url_for('static', filename='images/radiator.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+        <li>
+            Power steering fluid contains a reservoir with lines indicating the measurements. If steering becomes stiff or audible you should check this.
+            <img src="{{ url_for('static', filename='images/powersteering.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+        <li>
+            Brake fluid has a reservoir with lines to indicate measurements. If the brake pedal seems to have less pressure or brakes seem less effective, check this fluid.
+            <img src="{{ url_for('static', filename='images/brake.jpg') }}" class="img-fluid mx-auto d-block">
+        </li>
+    </ul>
+</div>
+
+</body>
+{% endblock %}
