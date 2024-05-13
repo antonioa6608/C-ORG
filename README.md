@@ -47,6 +47,12 @@ The projects and it's dependancies can be installed with: MANAULLY
 `pip install windows-curses`
 `pip install werkzeug`
 
+
+## Requirements.txt 
+The requirements.txt list the packages already so you need to just run 
+`pip install -r requirements.txt` 
+`flask --app mechanic_site run --debug` 
+
 ## we used sqlite3 for the database. link to download , standard installer depending on what type of operating system in your machine 
 https://sqlitebrowser.org/dl/
 ## locate the schema.sql to open it up in the DB BROWSER(SQLITE). schema.sql located in mechanic_site folder
